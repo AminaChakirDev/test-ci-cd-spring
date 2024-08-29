@@ -18,26 +18,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/articles")
 public class ArticleController {
     private final ArticleRepository articleRepository;
-    private final CategoryRepository categoryRepository;
-    private final ImageRepository imageRepository;
-    private final AuthorRepository authorRepository;
-
-    private final ArticleAuthorRepository articleAuthorRepository;
 
     private final ArticleService articleService;
 
     public ArticleController(
             ArticleRepository articleRepository,
-            CategoryRepository categoryRepository,
-            ImageRepository imageRepository,
-            AuthorRepository authorRepository,
-            ArticleAuthorRepository articleAuthorRepository,
             ArticleService articleService) {
         this.articleRepository = articleRepository;
-        this.categoryRepository = categoryRepository;
-        this.imageRepository = imageRepository;
-        this.authorRepository = authorRepository;
-        this.articleAuthorRepository = articleAuthorRepository;
         this.articleService = articleService;
     }
 
@@ -91,9 +78,6 @@ public class ArticleController {
     @GetMapping("/{id}")
     public ResponseEntity<ArticleDTO> getArticleById(@PathVariable Long id) {
         ArticleDTO article = articleService.getArticleById(id);
-        if (article == null) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(article);
     }
 
