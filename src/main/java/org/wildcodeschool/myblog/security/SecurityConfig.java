@@ -28,7 +28,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/articles/**").hasRole("USER") // Autoriser tous les utilisateurs à lire les articles
+                        .requestMatchers(HttpMethod.GET, "/articles/**").permitAll() // Autoriser les utilisateurs à lire les articles pour tester deploiement
                         .requestMatchers(HttpMethod.PUT, "/articles/**").hasRole("ADMIN") // Seuls les admins peuvent mettre à jour des articles
                         .requestMatchers(HttpMethod.DELETE, "/articles/**").hasRole("ADMIN") // Seuls les admins peuvent supprimer des articles
                         .requestMatchers("/auth/**").permitAll() // Permettre l'accès public aux endpoints sous /auth/

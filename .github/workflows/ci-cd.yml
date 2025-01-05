@@ -35,6 +35,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Build JAR on server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+          cd myblog && mvn clean package"
+
       - name: Deploy to server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd myblog && docker-compose up -d --build"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+          cd myblog && docker-compose up -d --build"
