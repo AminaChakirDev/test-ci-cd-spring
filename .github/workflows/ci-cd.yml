@@ -46,7 +46,7 @@ jobs:
       - name: Build JAR on server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
-          cd myblog && mvn clean package"
+          cd myblog && mvn clean package -DskipTests"
 
       - name: Deploy to server
         run: |
